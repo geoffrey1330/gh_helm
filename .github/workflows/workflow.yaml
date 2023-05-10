@@ -27,17 +27,13 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
+
       - name: 'Deploy'
-        uses: 'droppmarket/helm-deploy@v1'
+        uses: 'deliverybot/helm@master'
         with:
-          namespace: 'default'
-          chart: 'app'
           token: '${{ github.token }}'
-          values: |
-            name: foobar
-          value-files: >-
-            [
-              "values.yaml", 
-            ]
+          chart: 'app'
+          release: production-myapp
+          value-files: './helm-chart/values.yaml'
         env:
           KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
