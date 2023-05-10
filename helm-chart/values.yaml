@@ -1,0 +1,33 @@
+# for discovering services and pods
+
+namespace: default
+apps:
+  docker_gh_helm:
+    name: myapp-deployment
+    
+    replicaCount: 3
+    labels:
+      app: myapp
+      type: docker-gh_helm
+    container:
+      name: docker-gh_helm-container
+      repository: geoffrey13/gh_helm:ef3f7565470c810354becdc74d3604d72e92b09e
+    resources:
+      requests:
+        cpu: 0.5
+        memory: "1Gi"
+      limits:
+        cpu: 1.0
+        memory: "2Gi"
+  pullPolicy: Always
+
+service:
+  docker_gh_helm:
+    name: myapp-service
+    type: LoadBalancer
+    protocol: TCP
+    externalPort: 80
+    internalPort: 80
+
+
+tolerations: []

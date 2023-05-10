@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.apps.docker_gh_helm.name }}
+  labels:
+    app: {{ .Values.apps.docker_gh_helm.labels.app }}
+    type: {{ .Values.apps.docker_gh_helm.labels.type }}
+spec:  
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      name: myapp-pod
+      labels:
+        app: {{ .Values.apps.docker_gh_helm.labels.app }}
+        type: {{ .Values.apps.docker_gh_helm.labels.type }}
+    spec:
+      containers:
+      - name: {{ .Values.apps.docker_gh_helm.container.name }}
+        image: {{ .Values.apps.docker_gh_helm.container.repository }}
+        ports:
+          - containerPort: {{ .Values.service.docker_gh_helm.internalPort }}
+        imagePullPolicy: {{ .Values.apps.pullPolicy }}
+        readinessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.docker_gh_helm.internalPort }}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 8
+        livenessProbe:
+          httpGet:
+            path: /
+            port: {{ .Values.service.docker_gh_helm.internalPort }}
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 8 
+        resources:
+          requests:
+            memory: {{ .Values.apps.docker_gh_helm.resources.requests.memory }}
+            cpu: {{ .Values.apps.docker_gh_helm.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.apps.docker_gh_helm.resources.limits.memory }}
+            cpu: {{ .Values.apps.docker_gh_helm.resources.limits.cpu }}
+  replicas: {{ .Values.apps.docker_gh_helm.replicaCount}}
+  selector:
+    matchLabels:
+      type: {{ .Values.apps.docker_gh_helm.labels.type }}
