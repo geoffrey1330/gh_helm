@@ -25,14 +25,14 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: username/repo:${{ github.sha }}
+          tags: geoffrey13/gh_helm:${{ github.sha }}
 
-      - name: Install Helm
-        uses: helm/setup-helm@v1
+      # - name: Install Helm
+      #   uses: helm/setup-helm@v1
 
-      - name: Deploy to EKS cluster
-        uses: helm/kubectl@v1.0.3
-        with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          command: apply
-          arguments: -f ./helm-chart/values.yaml
+      # - name: Deploy to EKS cluster
+      #   uses: helm/kubectl@v1.0.3
+      #   with:
+      #     kubeconfig: ${{ secrets.KUBECONFIG }}
+      #     command: apply
+      #     arguments: -f ./helm-chart/values.yaml
