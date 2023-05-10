@@ -10,7 +10,7 @@ apps:
       type: docker-ghhelm
     container:
       name: docker-ghhelm-container
-      repository: {{ env.REPO }}
+      repository: {{ env.repo }}
     resources:
       requests:
         cpu: 0.5
