@@ -1,5 +1,4 @@
 # for discovering services and pods
-
 namespace: default
 apps:
   docker_gh_helm:
