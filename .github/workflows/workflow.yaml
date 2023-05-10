@@ -1,0 +1,38 @@
+name: Build and Deploy to EKS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: username/repo:${{ github.sha }}
+
+      - name: Install Helm
+        uses: helm/setup-helm@v1
+
+      - name: Deploy to EKS cluster
+        uses: helm/kubectl@v1.0.3
+        with:
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          command: apply
+          arguments: -f ./helm-chart/values.yaml
