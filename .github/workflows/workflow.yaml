@@ -26,9 +26,7 @@ jobs:
           file: Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
-
-      - name: Set environment variable
-        run: echo "repo=${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}" >> $GITHUB_ENV
+                ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:latest
 
       - name: Deploy Helm
         uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
