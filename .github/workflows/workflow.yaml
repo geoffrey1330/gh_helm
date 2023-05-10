@@ -38,4 +38,4 @@ jobs:
           config-files: ./helm-chart/values.yaml
           chart-path: ./helm-chart
           namespace: default
-          
+          name: gh-helm
