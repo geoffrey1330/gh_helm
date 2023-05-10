@@ -27,12 +27,17 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
-      - name: Install Helm
-        uses: helm/setup-helm@v1
-
-      - name: Deploy to EKS cluster
-        uses: helm/kubectl@v1.0.3
+      - name: 'Deploy'
+        uses: 'deliverybot/helm@v1'
         with:
-          kubeconfig: ${{ secrets.KUBECONFIG }}
-          command: apply
-          arguments: -f ./helm-chart/values.yaml
+          namespace: 'default'
+          chart: 'app'
+          token: '${{ github.token }}'
+          values: |
+            name: foobar
+          value-files: >-
+            [
+              "values.yaml", 
+            ]
+        env:
+          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'

@@ -1,16 +1,16 @@
 apiVersion: v1
-name: mernchart
+name: app
 version: 1.0.0
-description: helm chart for  https://github.com/geoffrey1330/kubernetes_task/helm
+description: helm chart for  https://github.com/geoffrey1330/gh_helm/helm-chart
 
 keywords:
   - docker-gh_helm
   - chart
 
-home: https://github.com/geoffrey1330/kubernetes_task/helm
+home: https://github.com/geoffrey1330/gh_helm/helm-chart
 
 sources:
-  - https://github.com/geoffrey1330/kubernetes_task/helm
+  - https://github.com/geoffrey1330/gh_helm/helm-chart
   
 maintainers: # (optional)
   - name: Geoffrey Israel
