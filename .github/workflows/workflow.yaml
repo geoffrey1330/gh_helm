@@ -28,7 +28,7 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
       - name: 'Deploy'
-        uses: 'deliverybot/helm@v1'
+        uses: 'droppmarket/helm-deploy@v1'
         with:
           namespace: 'default'
           chart: 'app'
