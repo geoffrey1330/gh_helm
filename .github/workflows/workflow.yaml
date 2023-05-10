@@ -25,7 +25,7 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: geoffrey13/gh_helm:${{ github.sha }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
       # - name: Install Helm
       #   uses: helm/setup-helm@v1
