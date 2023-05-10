@@ -28,12 +28,14 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
 
-      - name: 'Deploy'
-        uses: 'deliverybot/helm@master'
+      - name: Deploy Helm
+        uses: bitovi/github-actions-deploy-eks-helm@v1.2.4
         with:
-          token: '${{ github.token }}'
-          chart: 'app'
-          release: production-myapp
-          value-files: './helm-chart/values.yaml'
-        env:
-          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+          cluster-name: kubernetes_task-main-cluster
+          config-files: ./helm-chart/values.yaml
+          chart-path: ./helm-chart
+          namespace: default
+          name: gh_helm
