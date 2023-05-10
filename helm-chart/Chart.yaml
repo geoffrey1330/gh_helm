@@ -1,16 +1,16 @@
 apiVersion: v1
 name: app
 version: 1.0.0
-description: helm chart for  https://github.com/geoffrey1330/gh_helm/helm-chart
+description: helm chart for  https://github.com/geoffrey1330/ghhelm/helm-chart
 
 keywords:
-  - docker-gh_helm
+  - docker-ghhelm
   - chart
 
-home: https://github.com/geoffrey1330/gh_helm/helm-chart
+home: https://github.com/geoffrey1330/ghhelm/helm-chart
 
 sources:
-  - https://github.com/geoffrey1330/gh_helm/helm-chart
+  - https://github.com/geoffrey1330/ghhelm/helm-chart
   
 maintainers: # (optional)
   - name: Geoffrey Israel

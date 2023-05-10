@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.service.docker_gh_helm.name }}
+  name: {{ .Values.service.docker_ghhelm.name }}
 spec:
   selector:
-    app: {{ .Values.apps.docker_gh_helm.labels.app }}
-    type: {{ .Values.apps.docker_gh_helm.labels.type }}
+    app: {{ .Values.apps.docker_ghhelm.labels.app }}
+    type: {{ .Values.apps.docker_ghhelm.labels.type }}
   ports:
-    - protocol: {{ .Values.service.docker_gh_helm.protocol }}
-      port: {{ .Values.service.docker_gh_helm.externalPort }}
-      targetPort: {{ .Values.service.docker_gh_helm.internalPort }}
-  type: {{ .Values.service.docker_gh_helm.type }}
+    - protocol: {{ .Values.service.docker_ghhelm.protocol }}
+      port: {{ .Values.service.docker_ghhelm.externalPort }}
+      targetPort: {{ .Values.service.docker_ghhelm.internalPort }}
+  type: {{ .Values.service.docker_ghhelm.type }}

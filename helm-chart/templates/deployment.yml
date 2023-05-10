@@ -1,10 +1,10 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.apps.docker_gh_helm.name }}
+  name: {{ .Values.apps.docker_ghhelm.name }}
   labels:
-    app: {{ .Values.apps.docker_gh_helm.labels.app }}
-    type: {{ .Values.apps.docker_gh_helm.labels.type }}
+    app: {{ .Values.apps.docker_ghhelm.labels.app }}
+    type: {{ .Values.apps.docker_ghhelm.labels.type }}
 spec:  
   minReadySeconds: 5
   strategy:
@@ -16,37 +16,37 @@ spec:
     metadata:
       name: myapp-pod
       labels:
-        app: {{ .Values.apps.docker_gh_helm.labels.app }}
-        type: {{ .Values.apps.docker_gh_helm.labels.type }}
+        app: {{ .Values.apps.docker_ghhelm.labels.app }}
+        type: {{ .Values.apps.docker_ghhelm.labels.type }}
     spec:
       containers:
-      - name: {{ .Values.apps.docker_gh_helm.container.name }}
-        image: {{ .Values.apps.docker_gh_helm.container.repository }}
+      - name: {{ .Values.apps.docker_ghhelm.container.name }}
+        image: {{ .Values.apps.docker_ghhelm.container.repository }}
         ports:
-          - containerPort: {{ .Values.service.docker_gh_helm.internalPort }}
+          - containerPort: {{ .Values.service.docker_ghhelm.internalPort }}
         imagePullPolicy: {{ .Values.apps.pullPolicy }}
         readinessProbe:
           httpGet:
             path: /
-            port: {{ .Values.service.docker_gh_helm.internalPort }}
+            port: {{ .Values.service.docker_ghhelm.internalPort }}
           initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 8
         livenessProbe:
           httpGet:
             path: /
-            port: {{ .Values.service.docker_gh_helm.internalPort }}
+            port: {{ .Values.service.docker_ghhelm.internalPort }}
           initialDelaySeconds: 10
           periodSeconds: 5
           failureThreshold: 8 
         resources:
           requests:
-            memory: {{ .Values.apps.docker_gh_helm.resources.requests.memory }}
-            cpu: {{ .Values.apps.docker_gh_helm.resources.requests.cpu }}
+            memory: {{ .Values.apps.docker_ghhelm.resources.requests.memory }}
+            cpu: {{ .Values.apps.docker_ghhelm.resources.requests.cpu }}
           limits:
-            memory: {{ .Values.apps.docker_gh_helm.resources.limits.memory }}
-            cpu: {{ .Values.apps.docker_gh_helm.resources.limits.cpu }}
-  replicas: {{ .Values.apps.docker_gh_helm.replicaCount}}
+            memory: {{ .Values.apps.docker_ghhelm.resources.limits.memory }}
+            cpu: {{ .Values.apps.docker_ghhelm.resources.limits.cpu }}
+  replicas: {{ .Values.apps.docker_ghhelm.replicaCount}}
   selector:
     matchLabels:
-      type: {{ .Values.apps.docker_gh_helm.labels.type }}
+      type: {{ .Values.apps.docker_ghhelm.labels.type }}
