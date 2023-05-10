@@ -27,20 +27,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/gh_helm:${{ github.sha }}
 
-      - name: Install kubectl
-        uses: jessestuart/action-kubectl@master
+      - name: Install Helm
+        uses: helm/setup-helm@v1
+
+      - name: Deploy to EKS cluster
+        uses: helm/kubectl@v1.0.3
         with:
-          version: '1.21.0'
-
-      # - name: Configure kubectl
-      #   run: echo "$KUBECONFIG" | base64 --decode > kubeconfig.yaml
-
-      # - name: Install Helm
-      #   uses: helm/setup-helm@v1
-
-      # - name: Deploy to EKS cluster
-      #   uses: helm/kubectl@v1.0.3
-      #   with:
-      #     kubeconfig: kubeconfig.yaml
-      #     command: apply
-      #     arguments: -f ./helm-chart/values.yaml
+          kubeconfig: ${{ secrets.KUBECONFIG }}
+          command: apply
+          arguments: -f ./helm-chart/values.yaml
